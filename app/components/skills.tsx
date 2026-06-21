@@ -6,7 +6,7 @@ import { skills } from "../data";
 
 export default function Skills() {
     return (
-        <section id="skills" className="animate-fade-in-up">
+        <section id="skills">
             <div className="container px-5 py-10 mx-auto">
                 <div className="text-center mb-20">
                     <ChipIcon className="w-10 inline-block mb-4" />
@@ -20,7 +20,7 @@ export default function Skills() {
                 <div className="flex flex-wrap -m-4">
                     {skills.map((group) => (
                         <div key={group.title} className="p-4 sm:w-1/2 lg:w-1/3 w-full">
-                            <div className="h-full border border-gray-700 bg-gray-900 rounded-3xl p-6 shadow-lg shadow-black/20 transition duration-300 hover:border-green-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-500/10">
+                            <div className="h-full border border-gray-700 bg-gray-900 rounded-3xl p-6 shadow-lg shadow-black/20 transition hover:border-green-500">
                                 <h2 className="text-xl font-semibold text-white mb-5">{group.title}</h2>
                                 <div className="space-y-3">
                                     {group.items.map((skill) => (

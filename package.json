@@ -12,8 +12,8 @@
     "@vercel/analytics": "^1.3.2",
     "@vercel/edge-config": "^1.3.0",
     "next": "14.2.15",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@emailjs/browser": "^3.12.1",
