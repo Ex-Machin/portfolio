@@ -2,33 +2,51 @@
 
 'use client';
 import emailjs from '@emailjs/browser';
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
+
+const STORAGE_KEY = 'portfolio-contact-submitted';
 
 export default function Contact() {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
     const [success, setSuccess] = useState<boolean>(false)
+    const [hasSubmitted, setHasSubmitted] = useState<boolean>(false)
+
+    useEffect(() => {
+        emailjs.init("dYN-GyK3RJbBzst6q")
+        if (typeof window !== 'undefined') {
+            const stored = window.localStorage.getItem(STORAGE_KEY)
+            if (stored === 'true') {
+                setHasSubmitted(true)
+                setSuccess(true)
+            }
+        }
+    }, [])
 
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
-        emailjs.init("dYN-GyK3RJbBzst6q"), []
         event.preventDefault()
+        if (hasSubmitted) {
+            return
+        }
+
         setIsLoading(true)
-        setError(null) // Clear previous errors when a new request starts
+        setError(null)
 
         try {
             const formData = new FormData(event.currentTarget)
-            await emailjs.send('service_kwej7f9', 'template_rd8x0qh', {
+            await emailjs.send('service_axuijxm', 'template_rd8x0qh', {
                 to_name: "Dmytro",
                 from_name: formData.get('name'),
                 reply_to: formData.get('email'),
                 message: formData.get('message')
             })
+            window.localStorage.setItem(STORAGE_KEY, 'true')
             setSuccess(true)
+            setHasSubmitted(true)
         /* eslint-disable */
         } catch (error: any) {
         /* eslint-disable */
-            // Capture the error message to display to the user
-            setError(error.message)
+            setError(error.message || 'Something went wrong while sending your message.')
             console.error(error)
         } finally {
             setIsLoading(false)
@@ -72,11 +90,39 @@ export default function Contact() {
                         </div>
                     </div>
                 </div>
-                {error && <div style={{ color: 'red' }}>{error}</div>}
-                {success && <div style={{ color: 'green' }}>Message sent successfully</div>}
-                {!success &&
+
+                {error && (
+                    <div className="lg:w-1/3 md:w-1/2 w-full p-4">
+                        <div className="rounded-lg border border-red-600 bg-red-900/80 p-6 text-red-100 shadow-xl">
+                            <p className="font-semibold">Failed to send message</p>
+                            <p className="mt-2 text-sm">{error}</p>
+                        </div>
+                    </div>
+                )}
+
+                {(success || hasSubmitted) ? (
+                    <div className="lg:w-1/3 md:w-1/2 w-full md:ml-auto flex flex-col justify-center p-8 mt-8 md:mt-0">
+                        <div className="rounded-3xl border border-green-500 bg-green-950/90 p-8 shadow-2xl shadow-green-500/10 ring-1 ring-green-500/20 transform transition duration-700 ease-out hover:-translate-y-1 hover:shadow-green-500/30 animate-pulse">
+                            <div className="mb-4 inline-flex rounded-full bg-green-600/20 px-4 py-2 text-sm text-green-100 ring-1 ring-green-500/40">
+                                <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-green-400 animate-ping" />
+                                Submitted
+                            </div>
+                            <h2 className="text-white text-3xl font-semibold mb-3">
+                                Thank you for reaching out!
+                            </h2>
+                            <p className="leading-relaxed text-green-200 mb-6">
+                                Your message has been sent successfully and your submission is saved. I will get back to you soon.
+                            </p>
+                            <div className="rounded-2xl bg-green-900/80 px-5 py-4 text-left text-sm text-green-100 ring-1 ring-green-500/30">
+                                <p className="font-medium">Note</p>
+                                <p className="mt-2 text-green-200">
+                                    This contact form is disabled after submission to prevent duplicate messages.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
                     <form
-                        // netlify={true}
                         onSubmit={onSubmit}
                         name="contact"
                         className="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
@@ -127,13 +173,11 @@ export default function Contact() {
                             type="submit"
                             value="Send"
                             disabled={isLoading}
-                            className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                            className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg disabled:cursor-not-allowed disabled:opacity-60">
                             {isLoading ? 'Loading...' : 'Submit'}
                         </button>
                     </form>
-
-                }
-
+                )}
             </div>
         </section>
     );
