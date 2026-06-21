@@ -111,7 +111,7 @@ export default function Contact() {
                                 Thank you for reaching out!
                             </h2>
                             <p className="leading-relaxed text-green-200 mb-6">
-                                Your message has been sent successfully and your submission is saved. I will get back to you soon.
+                                Your message has been sent successfully and your submission is saved. I usually reply within 24 hours and am available for remote work.
                             </p>
                             <div className="rounded-2xl bg-green-900/80 px-5 py-4 text-left text-sm text-green-100 ring-1 ring-green-500/30">
                                 <p className="font-medium">Note</p>
@@ -129,8 +129,14 @@ export default function Contact() {
                         <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font">
                             Hire Me
                         </h2>
+                        <p className="leading-relaxed mb-2">
+                            I usually reply within 24 hours and am available for remote work.
+                        </p>
                         <p className="leading-relaxed mb-5">
-                            Please contact me, if you are interested in collaboration
+                            Please contact me if you are interested in collaboration.
+                        </p>
+                        <p className="text-sm text-gray-400 mb-6">
+                            Prefer to connect on LinkedIn? <a href="https://www.linkedin.com/in/dmytro-mykhailiuk/" target="_blank" rel="noreferrer" className="text-indigo-300 hover:text-indigo-200">View my profile</a>.
                         </p>
                         <div className="relative mb-4">
                             <label htmlFor="name" className="leading-7 text-sm text-gray-400">

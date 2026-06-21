@@ -50,10 +50,16 @@ export const testimonials = [
 ];
 
 export const skills = [
-  "JavaScript",
-  "React",
-  "Next.js",
-  "Node",
-  "GraphQL",
-  "Material UI",
+  {
+    title: "Frontend",
+    items: ["JavaScript", "TypeScript", "React", "Angular", "HTML", "CSS"],
+  },
+  {
+    title: "Backend",
+    items: [".NET", "Django", "Flask", "Node.js", "REST APIs", "SQL"],
+  },
+  {
+    title: "Tools & Data",
+    items: ["Git", "Docker", "Data Visualization", "Analytics Integration", "Binance API", "Agile"],
+  },
 ];

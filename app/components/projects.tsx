@@ -14,7 +14,7 @@ export default async function Projects() {
     }
 
     return (
-        <section id="projects" className="text-gray-400 bg-gray-900 body-font">
+        <section id="projects" className="text-gray-400 bg-gray-900 body-font animate-fade-in-up">
             <div className="container px-5 py-10 mx-auto text-center lg:px-40">
                 <div className="flex flex-col w-full mb-20">
                     <CodeIcon className="mx-auto inline-block w-10 mb-4" />
@@ -42,7 +42,7 @@ export default async function Projects() {
                                 key={project.id}
                                 className="sm:w-1/2 w-full p-4">
                                 <div className="flex relative rounded-lg overflow-hidden border-4 border-gray-800 bg-gray-900">
-                                    <div className="px-8 py-10 relative w-full">
+                                    <div className="px-8 py-10 relative w-full transition duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-500/10 hover:border-green-500">
                                         <h2 className="tracking-widest text-sm title-font font-medium text-green-400 mb-1">
                                             {project.primaryLanguage?.name ?? "Repository"}
                                         </h2>
